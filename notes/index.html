@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en" class="h-100">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex,nofollow">
+
+    <meta name="description"
+        content="Effortlessly manage all of your notes in one convenient location with our powerful note management page.">
+    <meta name="author" content="Simone Ruberto, Riccardo Ruberto">
+    <title>Notes | MagicNote</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sign-in/">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="manifest" href="../site.webmanifest">
+    <link rel="mask-icon" href="../safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="theme-color" content="#ffffff">
+
+    <style>
+        .list-group {
+            max-height: 200px;
+            overflow-y:scroll;
+            -webkit-overflow-scrolling: touch;
+            overflow-x: hidden !important;
+        }
+
+        @media (min-width: 768px) {
+            .list-group {
+                max-height: 370px;
+            }
+        }
+    </style>
+
+    <link href="../css/style.css" rel="stylesheet">
+    <link href="../css/message.css" rel="stylesheet">
+</head>
+
+<body class="d-flex h-100 text-center text-white bg-dark">
+
+    <div id="noCognitoMessage" class="configMessage" style="display: none;">
+        <div class="backdrop"></div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">No Cognito User Pool Configured</h3>
+            </div>
+            <div class="panel-body">
+                <p>There is no user pool configured in <a href="../../js/config.js">/js/config.js</a>. You'll configure this
+                    in Module 2 of the workshop.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <header class="mb-auto">
+            <div>
+                <h3 class="float-md-start mb-0"><a class="brand" href="../">MagicNote</a></h3>
+                <nav class="nav nav-masthead justify-content-center float-md-end">
+                    <a class="nav-link active" aria-current="page" href="#">Your notes</a>
+                    <a class="nav-link" href="new/">Create note</a>
+                    <a class="nav-link" id="signOut" href="#">Sign out</a>
+                </nav>
+            </div>
+        </header>
+
+        <main class="px-3">
+            <h1>See your notes</h1>
+            <p class="lead">Stay on top of your tasks and never lose a note again.</p>
+
+            <div class="list-group">
+                <div id="notes">
+                    <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
+                        The current button
+                    </button>
+                    <button type="button" class="list-group-item list-group-item-action">____________________________________________________________________________________________________________________________________________</button>
+                    <button type="button" class="list-group-item list-group-item-action">A third button item</button>
+                    <button type="button" class="list-group-item list-group-item-action">A fourth button item</button>
+                    <button type="button" class="list-group-item list-group-item-action" disabled>A disabled button item</button>
+                    <button type="button" class="list-group-item list-group-item-action">A second item</button>
+                    <button type="button" class="list-group-item list-group-item-action">A third button item</button>
+                    <button type="button" class="list-group-item list-group-item-action">A fourth button item</button>
+                    <button type="button" class="list-group-item list-group-item-action" disabled>A disabled button item</button>
+                    <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
+                    The current button
+                    </button>
+                    <button type="button" class="list-group-item list-group-item-action">______________________________________________________________________</button>
+                    <button type="button" class="list-group-item list-group-item-action">A third button item</button>
+                    <button type="button" class="list-group-item list-group-item-action">A fourth button item</button>
+                    <button type="button" class="list-group-item list-group-item-action" disabled>A disabled button item</button>
+                    <button type="button" class="list-group-item list-group-item-action">A second item</button>
+                    <button type="button" class="list-group-item list-group-item-action">A third button item</button>
+                    <button type="button" class="list-group-item list-group-item-action">A fourth button item</button>
+                    <button type="button" class="list-group-item list-group-item-action" disabled>A disabled button item</button>
+                </div>
+                                
+                <div class="list-group-item list-group-item-action p-3">
+                    <button class="btn btn-md btn-primary fw-bold" id="loadMore">Load more</button>
+                </div>
+            </div>
+        </main>
+
+        <footer class="mt-auto text-white-50">
+            <p>Copyright 2023 by Simone Ruberto & Riccardo Ruberto.<br>All Rights Reserved.
+                <a href="https://github.com/Er-Simon/cc-project" class="text-white">GitHub Repository</a>.
+            </p>
+        </footer>
+    </div>
+
+    <script src="../js/vendor/jquery-3.1.0.js"></script>
+    <script src="../js/vendor/aws-cognito-sdk.min.js"></script>
+    <script src="../js/vendor/amazon-cognito-identity.min.js"></script>
+    <script src="../js/config.js"></script>
+    <script src="../js/cognito-auth.js"></script>
+    <script src="../js/notes.js"></script>
+</body>
+
+</html>

@@ -121,6 +121,12 @@ var MagicNote = window.MagicNote || {};
     function displayNotes(notes) {
         var notesData = notes.data;
 
+        if (notesData.Items.length == 0) {
+            $('#status').removeClass("d-none");
+        } else {
+            $('#status').addClass("d-none");
+        }
+
         for (let i = 0; i < notesData.Items.length; i++) {
             var note = notesData.Items[i];
             $('#notes').append($('<button type="button" class="list-group-item list-group-item-action item-note" id=\'' + note.id.S + '\'>' + note.title.S + '</button>'));

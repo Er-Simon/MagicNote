@@ -47,7 +47,9 @@
             background-color: #007bff;
         }
 
-        .modal-title, .modal-body {
+        .modal-title,
+        .modal-body,
+        .alert {
             color: initial;
             text-shadow: initial;
         }
@@ -98,6 +100,10 @@
                 </div>
             </div>
         </main>
+
+        <div class="alert alert-primary d-none" role="alert" id="status">
+            You have no notes, create a note <a href="./new">now!</a>
+        </div>
 
         <!-- Modal -->
         <div class="modal fade" id="noteModal" tabindex="-1" aria-labelledby="noteModalLabel" aria-hidden="true">

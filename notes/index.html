@@ -31,7 +31,7 @@
     <style>
         .list-group {
             max-height: 200px;
-            overflow-y:scroll;
+            overflow-y: scroll;
             -webkit-overflow-scrolling: touch;
             overflow-x: hidden !important;
         }
@@ -40,6 +40,20 @@
             .list-group {
                 max-height: 370px;
             }
+        }
+
+        .list-group-item:hover {
+            color: white;
+            background-color: #007bff;
+        }
+
+        .modal-title, .modal-body {
+            color: initial;
+            text-shadow: initial;
+        }
+
+        .btn-secondary {
+            color: white !important;
         }
     </style>
 
@@ -56,7 +70,8 @@
                 <h3 class="panel-title">No Cognito User Pool Configured</h3>
             </div>
             <div class="panel-body">
-                <p>There is no user pool configured in <a href="../../js/config.js">/js/config.js</a>. You'll configure this
+                <p>There is no user pool configured in <a href="../../js/config.js">/js/config.js</a>. You'll configure
+                    this
                     in Module 2 of the workshop.</p>
             </div>
         </div>
@@ -80,35 +95,29 @@
 
             <div class="list-group">
                 <div id="notes">
-                    <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
-                        The current button
-                    </button>
-                    <button type="button" class="list-group-item list-group-item-action">____________________________________________________________________________________________________________________________________________</button>
-                    <button type="button" class="list-group-item list-group-item-action">A third button item</button>
-                    <button type="button" class="list-group-item list-group-item-action">A fourth button item</button>
-                    <button type="button" class="list-group-item list-group-item-action" disabled>A disabled button item</button>
-                    <button type="button" class="list-group-item list-group-item-action">A second item</button>
-                    <button type="button" class="list-group-item list-group-item-action">A third button item</button>
-                    <button type="button" class="list-group-item list-group-item-action">A fourth button item</button>
-                    <button type="button" class="list-group-item list-group-item-action" disabled>A disabled button item</button>
-                    <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
-                    The current button
-                    </button>
-                    <button type="button" class="list-group-item list-group-item-action">______________________________________________________________________</button>
-                    <button type="button" class="list-group-item list-group-item-action">A third button item</button>
-                    <button type="button" class="list-group-item list-group-item-action">A fourth button item</button>
-                    <button type="button" class="list-group-item list-group-item-action" disabled>A disabled button item</button>
-                    <button type="button" class="list-group-item list-group-item-action">A second item</button>
-                    <button type="button" class="list-group-item list-group-item-action">A third button item</button>
-                    <button type="button" class="list-group-item list-group-item-action">A fourth button item</button>
-                    <button type="button" class="list-group-item list-group-item-action" disabled>A disabled button item</button>
-                </div>
-                                
-                <div class="list-group-item list-group-item-action p-3">
-                    <button class="btn btn-md btn-primary fw-bold" id="loadMore">Load more</button>
                 </div>
             </div>
         </main>
+
+        <!-- Modal -->
+        <div class="modal fade" id="noteModal" tabindex="-1" aria-labelledby="noteModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalNoteTitle"></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="text-start" id="modalNoteContent"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
         <footer class="mt-auto text-white-50">
             <p>Copyright 2023 by Simone Ruberto & Riccardo Ruberto.<br>All Rights Reserved.

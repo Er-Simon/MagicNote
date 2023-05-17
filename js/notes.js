@@ -2,9 +2,9 @@
 
 var MagicNote = window.MagicNote || {};
 
+
 (function notesScopeWrapper($) {
     var authToken;
-    var limits = new Map();
 
     MagicNote.authToken.then(function setAuthToken(token) {
         if (token) {
@@ -42,12 +42,6 @@ var MagicNote = window.MagicNote || {};
             headers: {
                 Authorization: authToken
             },
-            data: JSON.stringify({
-                Limits: {
-                    Start: limits.get("start"),    
-                    End: limits.get("end")
-                }
-            }),
             contentType: 'application/json',
             success: completeGetRequest,
             error: function ajaxError(jqXHR, textStatus, errorThrown) {
@@ -60,47 +54,61 @@ var MagicNote = window.MagicNote || {};
 
     function completeGetRequest(result) {
         console.log('Response received from API: ', result);
-
-        // controlla size di result e in caso disattiva il bottone load notes
-        // se != 0 visualizza note
         displayNotes(result);
+    }
+
+    function showNote(noteId, onSuccess, onFailure) {
+        $.ajax({
+            method: 'GET',
+            url: _config.api.invokeUrl + '/note/show',
+            headers: {
+                Authorization: authToken
+            },
+            data: {
+                "id": noteId,
+            },
+            contentType: 'application/json',
+            success: onSuccess,
+            error: onFailure
+        });
     }
 
     // Register click handler for #request button
     $(function onDocReady() {
-        $('#loadMore').click(handleGetClick);
+        if($('#notes').length > 0) {
+            getNotes();
+         }
+
         $('#newNoteForm').submit(handleNoteCreation);
+
+        $(document).on('click', '.item-note', handleShowNote);
 
         if (!_config.api.invokeUrl) {
             $('#noApiMessage').show();
         }
     });
 
-    function handleGetClick(event) {
-        event.preventDefault();
-        
-        console.log("limits");
-        console.log(limits);
+    function handleShowNote() {
+        var noteId = this.id;
 
-        if (limits.size === 0) {
-            limits.set("start", 0);
-            limits.set("end", 20);
-        } else {
-            var actual_value = limits.get("end");
-            limits.set("start", actual_value);
-            limits.set("end", actual_value + 20);
-        }
-        
-        getNotes();
+        showNote(noteId,
+            displayNote,
+            function showNoteError(err) {
+                console.log(err);
+                alert(err);
+            }
+        );
     }
 
     function handleNoteCreation(event) {
         var title = $('#noteTitle').val();
         var content = $('#noteContent').val();
+
         event.preventDefault();
         createNote(title, content,
             function createNoteSuccess(result) {
-                console.log('call result: ' + result);
+                $('#noteTitle').val('');
+                $('#noteContent').val('');
                 alert('Note successfully created');
             },
             function createNoteError(err) {
@@ -111,9 +119,28 @@ var MagicNote = window.MagicNote || {};
     }
 
     function displayNotes(notes) {
-        for (let i = 0; i < notes.length; i++) {
-            console.log(notes[i]);
-            $('#notes').append($('<button type="button" class="list-group-item list-group-item-action" ' + notes[i]['id'] + '>' + notes[i]["title"] + '</button>'));
+        var notesData = notes.data;
+
+        for (let i = 0; i < notesData.Items.length; i++) {
+            var note = notesData.Items[i];
+            $('#notes').append($('<button type="button" class="list-group-item list-group-item-action item-note" id=\'' + note.id.S + '\'>' + note.title.S + '</button>'));
         }
     }
+
+    function displayNote(response) {
+        console.log("response:");
+        console.log(response);
+
+        var noteData = response.data;
+
+        if (noteData.Items.length == 1) {
+            var note = noteData.Items[0];
+            document.getElementById("modalNoteTitle").innerHTML = note.title.S;
+            document.getElementById("modalNoteContent").innerHTML = note.content.S;
+            console.log('Note displayed successfully');
+
+            $('#noteModal').modal('show');
+        }
+    }   
+
 }(jQuery));
